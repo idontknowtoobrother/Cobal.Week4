@@ -1,0 +1,33 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.Control4.
+       AUTHOR. 62160246.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+            SELECT STUDENT-FILE ASSIGN TO "GRADE.DAT"
+              ORGANIZATION IS LINE SEQUENTIAL.
+       DATA DIVISION.
+       FILE SECTION.
+       FD STUDENT-FILE .
+       01  STUDENT-DETAILS.
+           88 END-OF-STUDENT-FILE VALUE HIGH-VALUES.
+           05 STUDENT-ID      PIC X(8).
+           05 STUDENT-NAME    PIC X(16).
+           05 COURSE-CODE     PIC X(8).
+           05 GRADE           PIC X(2).
+       PROCEDURE DIVISION .
+       Begin.
+           OPEN INPUT STUDENT-FILE 
+           
+
+           PERFORM UNTIL END-OF-STUDENT-FILE 
+              READ STUDENT-FILE
+              AT END SET END-OF-STUDENT-FILE TO TRUE
+              END-READ
+              IF NOT END-OF-STUDENT-FILE THEN
+              DISPLAY STUDENT-NAME SPACE STUDENT-ID SPACE COURSE-CODE
+               SPACE GRADE
+              END-IF 
+           END-PERFORM
+           CLOSE STUDENT-FILE 
+           .

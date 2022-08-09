@@ -1,0 +1,33 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.Control6.
+       AUTHOR. 62160246.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 AGE  PIC 99     VALUE ZERO.
+           88 INFANT      VALUE 0 THRU 3.
+           88 YOUNG-CHILD VALUE 4 THRU 7.
+           88 CHILD       VALUE 8 THRU 12.
+           88 VISITOR     VALUE 13 THRU 64.
+           88 PENSIONER   VALUE 65 THRU 99.
+       01  HEIGHT      PIC 999 VALUE ZERO.
+       01  ADMISSION   PIC $99.99.
+       PROCEDURE DIVISION.
+       BEGIN.
+           DISPLAY "Enter age:-" WITH NO ADVANCING
+           ACCEPT AGE
+           DISPLAY "Enter height:-" WITH NO ADVANCING
+           ACCEPT HEIGHT
+           EVALUATE TRUE        ALSO TRUE 
+              WHEN INFANT       ALSO ANY MOVE 0 TO ADMISSION
+              WHEN YOUNG-CHILD  ALSO ANY MOVE 10 TO ADMISSION
+              WHEN CHILD        ALSO HEIGHT >= 48 MOVE 15 TO ADMISSION
+              WHEN CHILD        ALSO HEIGHT < 48 MOVE 10 TO ADMISSION
+              WHEN VISITOR      ALSO HEIGHT >= 48 MOVE 25 TO ADMISSION
+              WHEN VISITOR      ALSO HEIGHT < 48 MOVE 18 TO ADMISSION
+              WHEN PENSIONER    ALSO ANY MOVE 10 TO ADMISSION
+           END-EVALUATE
+           DISPLAY "ADMISSION CHARGED IS - " ADMISSION 
+           GOBACK
+           .
+                                   
